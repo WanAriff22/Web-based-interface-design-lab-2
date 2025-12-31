@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple E-Commerce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .products, .cart {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 50%;
+        }
+
+        .product {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .product:last-child {
+            border-bottom: none;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .total {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .receipt {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 2px dashed #333;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Simple E-Commerce Store</h1>
+
+<div class="container">
+
+    <!-- Products Section -->
+    <div class="products">
+        <h2>Products</h2>
+
+        <div class="product">
+            <p>Product A - RM 10</p>
+            <button onclick="addToCart('Product A', 10)">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <p>Product B - RM 20</p>
+            <button onclick="addToCart('Product B', 20)">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <p>Product C - RM 15</p>
+            <button onclick="addToCart('Product C', 15)">Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Cart Section -->
+    <div class="cart">
+        <h2>Cart / Receipt</h2>
+        <div id="cartItems"></div>
+        <div class="total" id="totalPrice">Total: RM 0</div>
+
+        <div class="receipt">
+            <p><strong>Thank you for your purchase!</strong></p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    let cart = [];
+    let total = 0;
+
+    function addToCart(name, price) {
+        cart.push({ name, price });
+        total += price;
+        updateCart();
+    }
+
+    function updateCart() {
+        const cartItems = document.getElementById("cartItems");
+        cartItems.innerHTML = "";
+
+        cart.forEach((item, index) => {
+            cartItems.innerHTML += `
+                <div class="cart-item">
+                    <span>${index + 1}. ${item.name}</span>
+                    <span>RM ${item.price}</span>
+                </div>
+            `;
+        });
+
+        document.getElementById("totalPrice").innerText = "Total: RM " + total;
+    }
+</script>
+
+</body>
+</html>
